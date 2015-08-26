@@ -1,0 +1,24 @@
+1、所有方法生成的显著图的格式都与数据集中图片的格式相同，一般数据集中图片的格式为jpg，生成的显著图也是jpg格式的。有必要让BMS生成的显著图也变成jpg格式的。这样是为了跑HouXiaodi的AUC评价程序时方便。
+
+2、一般的显著性检测代码都只能跑RGB图像，有的数据集中会包含灰度图像（例如CAT2000），需要预先做一下处理，使灰度图像变为RGB图像。
+
+3、SUN跑得最慢，在除了服务器的机器上跑会死机，所以只能在服务器上跑。
+
+4、BMS只能在戴嘉伦原先的Ubuntu系统上跑（matlab+OpenCV），程序是戴嘉伦编译的，产生了可执行文件。并且在bruce数据集、imgsal数据集和CAT2000的每个子数据集上都分别有2幅图片跑不出来。可以通过修改这两幅图片的文件名使其跑通。
+
+5、AIM跑得也相对较慢，需要分到多个电脑上跑。
+
+6、GBVS和ITTI在运行之前都先要运行一下gbvs_install.m。
+
+7、数据集共5个：bruce、CAT2000、imgsal、judd、pascal
+
+8、bruce中图像size均为[511 681]，CAT2000中图像size均为[1080 1920]，imgsal中图像size均为[480 640]，judd和pascal中图像size不是固定的，如果在评价时需要对显著图进行滤波，滤波参数的求取会用到图像size。
+
+9、评价程序共7种：NSS、KL、AUC_Borji、AUC_Judd、AUC_HouXiaodi、AUC_Borji_SMblur、AUC_Judd_SMblur。
+
+10、除了HouXiaodi的AUC评价程序已经写好，有特定的fixation ground truth格式，其它所有评价程序需要的fixation ground truth都要自己编程序转换得到（一般是二值图形式）。一般数据集给的fixation ground truth是观察者在每幅图像上的注视点，是坐标的形式，这里就需要将坐标形式转换为对应的二值图形式，如果某坐标是注视点，该点值变为1，不是注视点的其余点均为0。
+
+11、跑HouXiaodi的AUC评价程序时，CAT2000数据集与这个评价程序本身要求的数据集格式不同。所以将HouXiaodi的AUC评价程序改为两份，一份跑bruce、imgsal、judd、pascal数据集，一份跑CAT2000数据集。
+
+12、其中benchNSS、benchKL、benchAUC_Borji跑得都很快，大概两个小时可以跑完。benchAUC_Judd在服务器上跑大概需要六、七个小时。
+
