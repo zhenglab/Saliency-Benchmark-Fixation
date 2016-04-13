@@ -28,7 +28,8 @@ SET (target "BMS")
 PROJECT (${target} CXX)
 
 # define source files
-FILE (GLOB src *.h *.cpp)
+#CVBIOUC# FILE (GLOB src *.h *.cpp)
+FILE (GLOB src *.h *.cpp) #CVBIOUC#
 
 # add current directory to the cmake_module_path for reading the "findiconv.cmake"
 # LIST(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR} )
